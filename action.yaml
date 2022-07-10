@@ -15,8 +15,7 @@ inputs:
     required: true
   github-app-id:
     description: The title to be used for a container image label
-    required: false
-    default: "218691"
+    required: true
   github-app-key:
     description: The PEM file contents for the GitHub App
     required: true
