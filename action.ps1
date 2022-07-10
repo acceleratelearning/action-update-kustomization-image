@@ -73,10 +73,12 @@ if (-Not $builder.Path.EndsWith('.git')) {
 $builder.ToString()
 
 git clone $builder.ToString() $repo_dir
+if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
 
 Push-Location $kustomize_dir
 
 kustomize edit set image "$($ImageName):$NewTag"
+if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
 
 Pop-Location
 
@@ -88,8 +90,13 @@ if ($status) {
     git config user.email github-actions@github.com
     
     git add -A .
+    if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
+
     git commit -m "Updating image to $NewTag"
+    if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
+
     git push
+    if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
 }
 else {
     Write-Warning "No changes to commit"
