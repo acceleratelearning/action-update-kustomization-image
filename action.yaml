@@ -7,7 +7,7 @@ inputs:
   path:
     description: The path in the repo to update
     required: true
-  iamge-name:
+  image-name:
     description: The image name to update
     required: true
   new-tag:
@@ -25,6 +25,6 @@ runs:
   steps:
     - name: Update Kustomization Image
       shell: pwsh
-      run: ${{ github.action_path }}/action.ps1 -GitHubRepository '${{ inputs.github-repo }}' -Path '${{ inputs.path }}' -ImageName '${{ inputs.iamge-name }}' -NewTag '${{ inputs.new-tag }}' -GitHubAppId '${{ inputs.github-app-id }}'
+      run: ${{ github.action_path }}/action.ps1 -GitHubRepository '${{ inputs.github-repo }}' -Path '${{ inputs.path }}' -ImageName '${{ inputs.image-name }}' -NewTag '${{ inputs.new-tag }}' -GitHubAppId '${{ inputs.github-app-id }}'
       env:
         APP_KEY: ${{ inputs.github-app-key }}
