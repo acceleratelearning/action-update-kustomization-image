@@ -1,0 +1,26 @@
+name: Publish Release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  update:
+    name: Publish Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Get Next Release Version
+        id: get-next-release-version
+        uses: acceleratelearning/get-next-release-version-action@main
+        with:
+          major-minor-version: "1.1"
+
+      - name: Publish GitHub Release
+        id: publish-release
+        uses: acceleratelearning/publish-github-release-action@main
+        with:
+          version: "${{ steps.get-next-release-version.outputs.next-version }}"
+          prefix: v
+          add-major-minor-tags: true
